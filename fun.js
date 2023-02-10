@@ -84,7 +84,5 @@ const xAxis=d3.axisBottom(legendScale).tickValues([legendScale.domain()[0],...le
         .attr("transform","translate("+(w1)+","+30+")")
         .call(xAxis)
 
-console.log()
-
     })//Promise Closed
 })//document loaded
