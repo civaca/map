@@ -79,7 +79,7 @@ const legendScale=d3.scaleQuantile().domain(d3.extent(data[1],d=>d["bachelorsOrH
         
           
 // axis 
-const xAxis=d3.axisBottom(legendScale).tickValues([legendScale.domain()[0],...legendScale.quantiles()]).tickFormat(d=>d.toFixed(2)+"%")
+const xAxis=d3.axisBottom(legendScale).tickValues([legendScale.domain()[0],...legendScale.quantiles()]).tickFormat(d=>d.toFixed(1)+"%")
         svg.append("g")
         .attr("transform","translate("+(w1)+","+30+")")
         .call(xAxis)
