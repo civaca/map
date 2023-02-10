@@ -27,7 +27,7 @@ const tooltip=d3.select("body")
  const colorScale=d3.scaleQuantize().domain(d3.extent(data[1],d=>d["bachelorsOrHigher"]))//ColorsScale
         .range(['#0066CC', '#99CCFF', '#CCE5FF', '#FFFF99','#FF9933','#FFB266','#FF3333'])
 
-const legendScale=d3.scaleQuantize().domain(d3.extent(data[1],d=>d["bachelorsOrHigher"]))
+const legendScale=d3.scaleQuantile().domain(d3.extent(data[1],d=>d["bachelorsOrHigher"]))
         .range([w1/7,2*w1/7,3*w1/7,4*w1/7,5*w1/7,6*w1/7,7*w1/7,])
 //creating MAP
         svg.selectAll("path")
@@ -76,12 +76,15 @@ const legendScale=d3.scaleQuantize().domain(d3.extent(data[1],d=>d["bachelorsOrH
         .attr("width",(d)=>w1/7)
         .attr("height",20)
         .attr("fill",d=>colorScale(d["bachelorsOrHigher"]))
+        
           
 // axis 
-const xAxis=d3.axisBottom(legendScale).tickFormat((d)=>d+"%")
+const xAxis=d3.axisBottom(legendScale).tickValues([legendScale.domain()[0],...legendScale.quantiles()]).tickFormat(d=>d.toFixed(2)+"%")
         svg.append("g")
-        .attr("transform","translate("+(w1+w1/7)+","+30+")")
+        .attr("transform","translate("+(w1)+","+30+")")
         .call(xAxis)
+
+console.log()
 
     })//Promise Closed
 })//document loaded
